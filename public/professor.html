@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Professor Dashboard</title>
+  <link rel="stylesheet" href="/view/css/professional.css">
+
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" role="main" aria-label="Professor dashboard">
+      <div class="header">
+        <div class="left">
+          <div class="brand">
+            <div class="logo" aria-hidden="true">
+           
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 2L1 7l11 5 9-4.09V17" stroke="#042222" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round" />
+                <path d="M12 22v-8" stroke="#042222" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round" />
+              </svg>
+            </div>
+            <div>
+              <div class="title">Professor Dashboard</div>
+              <div class="subtitle">Overview of students — attendance & lab records</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <div class="control" title="Search by student name">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="opacity:.8"><path d="M21 21l-4.35-4.35" stroke="#99f0eb" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6" stroke="#99f0eb" stroke-width="1.6" /></svg>
+            <input id="searchName" type="search" placeholder="Search student name" />
+          </div>
+
+          <div class="control" title="Filter section">
+            <select id="filterSection" aria-label="Filter by section">
+              <option value="">All Sections</option>
+              <option value="A">Section A</option>
+              <option value="B">Section B</option>
+              <option value="C">Section C</option>
+            </select>
+          </div>
+
+          <div class="right">
+            <button class="ghost" id="resetBtn" title="Reset filters">Reset</button>
+            <button class="btn" id="exportBtn" title="Export visible rows">Export CSV</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="body">
+        <div class="stats" aria-hidden="true">
+          <div class="stat">
+            <div class="big" id="totalStudents">28</div>
+            <div class="tiny">Total Students</div>
+          </div>
+          <div class="stat">
+            <div class="big" id="avgAttendance">91%</div>
+            <div class="tiny">Average Attendance</div>
+          </div>
+          <div class="stat">
+            <div class="big" id="avgLab">88%</div>
+            <div class="tiny">Average Lab Attendance</div>
+          </div>
+        </div>
+
+        <div class="table-wrap" role="region" aria-label="Student table">
+          <table id="studentsTable">
+            <thead>
+              <tr>
+                <th>Student Name</th>
+                <th>Section</th>
+                <th>Attendance</th>
+                <th>Lab Attendance</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+              <tr>
+                <td>Tanisha Sahu</td>
+                <td><span class="chip">A</span></td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <div style="min-width:40px">92%</div>
+                    <div class="progress" aria-hidden="true"><i style="width:92%"></i></div>
+                  </div>
+                </td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <div style="min-width:40px">88%</div>
+                    <div class="progress" aria-hidden="true"><i style="width:88%"></i></div>
+                  </div>
+                </td>
+                <td><span class="muted">Good</span></td>
+              </tr>
+
+              <tr>
+                <td>Ravi Kumar</td>
+                <td><span class="chip">A</span></td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <div style="min-width:40px">95%</div>
+                    <div class="progress"><i style="width:95%"></i></div>
+                  </div>
+                </td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <div style="min-width:40px">90%</div>
+                    <div class="progress"><i style="width:90%"></i></div>
+                  </div>
+                </td>
+                <td><span class="muted">Excellent</span></td>
+              </tr>
+
+              <tr>
+                <td>Neha Patel</td>
+                <td><span class="chip">B</span></td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <div style="min-width:40px">89%</div>
+                    <div class="progress"><i style="width:89%"></i></div>
+                  </div>
+                </td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <div style="min-width:40px">85%</div>
+                    <div class="progress"><i style="width:85%"></i></div>
+                  </div>
+                </td>
+                <td><span class="muted">Needs follow-up</span></td>
+              </tr>
+
+              <tr>
+                <td>Aman Verma</td>
+                <td><span class="chip">B</span></td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <div style="min-width:40px">93%</div>
+                    <div class="progress"><i style="width:93%"></i></div>
+                  </div>
+                </td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <div style="min-width:40px">87%</div>
+                    <div class="progress"><i style="width:87%"></i></div>
+                  </div>
+                </td>
+                <td><span class="muted">Stable</span></td>
+              </tr>
+
+            
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    
+    :root{
+      --bg1: #0b1a23;
+      --bg2: #0f2b36;
+      --card: #111820;
+      --muted: #9aa6ad;
+      --accent: #33d6cc; 
+      --accent-2: #2eb9a8;
+      --glass: rgba(255,255,255,0.03);
+      --table-row: rgba(255,255,255,0.02);
+      --danger: #ff6b6b;
+      --radius-lg: 14px;
+      --radius-md: 10px;
+      --shadow-strong: 0 20px 40px rgba(3,10,14,0.65);
+    }
+
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, var(--bg1) 0%, #07131a 30%, #07161b 100%);
+      color: #e6f7f6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+   
+    .wrap{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:48px 24px;
+      gap:24px;
+    }
+
+  
+    .card{
+      width:100%;
+      max-width:1040px;
+      background: linear-gradient(180deg, rgba(10,18,22,0.92), rgba(6,12,14,0.88));
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-strong);
+      border: 1px solid rgba(61,128,125,0.06);
+      padding:28px;
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+    }
+
+
+    .header{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      justify-content:space-between;
+    }
+    .left{
+      display:flex;
+      gap:16px;
+      align-items:center;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .logo{
+      width:56px;
+      height:56px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,#12313a,#0fa89a);
+      box-shadow: 0 6px 18px rgba(49,200,185,0.08), inset 0 -6px 12px rgba(0,0,0,0.25);
+    }
+    .title{
+      font-size:22px;
+      line-height:1;
+      font-weight:700;
+      color:var(--accent);
+      text-shadow: 0 4px 18px rgba(51,214,204,0.06);
+    }
+    .subtitle{
+      font-size:13px;
+      color:var(--muted);
+      margin-top:4px;
+    }
+
+   
+    .controls{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .control{
+      background:var(--glass);
+      border:1px solid rgba(255,255,255,0.02);
+      padding:8px;
+      border-radius:10px;
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    input[type="search"], select{
+      background:transparent;
+      border:0;
+      color:inherit;
+      outline:none;
+      font-size:14px;
+      padding:8px 6px;
+      min-width:160px;
+    }
+    button.btn{
+      background:linear-gradient(180deg,var(--accent), var(--accent-2));
+      color:#042222;
+      border:0;
+      padding:10px 14px;
+      font-weight:700;
+      border-radius:10px;
+      cursor:pointer;
+      box-shadow: 0 8px 20px rgba(46,185,168,0.12);
+    }
+    button.ghost{
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.04);
+      color:var(--muted);
+      padding:8px 12px;
+      border-radius:10px;
+      cursor:pointer;
+    }
+
+    .body{
+      display:flex;
+      gap:20px;
+      align-items:flex-start;
+      flex-direction:column;
+    }
+
+    .stats{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+    .stat{
+      min-width:170px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+      border-radius:12px;
+      padding:14px;
+      border:1px solid rgba(255,255,255,0.02);
+    }
+    .stat .big{font-size:20px; font-weight:700; color:var(--accent);}
+    .stat .tiny{font-size:12px; color:var(--muted); margin-top:6px;}
+
+    .table-wrap{
+      overflow:auto;
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+      border:1px solid rgba(255,255,255,0.02);
+      padding:10px;
+    }
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:720px;
+    }
+    thead th{
+      text-align:left;
+      font-size:13px;
+      color:var(--accent);
+      padding:12px 14px;
+      border-bottom:1px solid rgba(255,255,255,0.03);
+      font-weight:700;
+      position:sticky;
+      top:0;
+      background:linear-gradient(180deg, rgba(5,12,14,0.6), rgba(5,12,14,0.4));
+      backdrop-filter: blur(6px);
+    }
+    tbody tr{
+      transition: background .18s ease, transform .12s ease;
+      border-bottom: 1px solid rgba(255,255,255,0.01);
+    }
+    tbody tr:hover{ background: rgba(51,214,204,0.02); transform: translateY(-1px); }
+    td{
+      padding:12px 14px;
+      color:#d7efee;
+      font-size:14px;
+      vertical-align:middle;
+    }
+
+    .chip{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:999px;
+      background: rgba(255,255,255,0.03);
+      color:var(--muted);
+      font-size:13px;
+      border:1px solid rgba(255,255,255,0.02);
+    }
+
+    .progress{
+      height:10px;
+      width:150px;
+      background: rgba(255,255,255,0.03);
+      border-radius:999px;
+      overflow:hidden;
+      display:inline-block;
+      vertical-align:middle;
+    }
+    .progress > i{
+      display:block;
+      height:100%;
+      background: linear-gradient(90deg, #1de9b6, #00bfa5);
+      border-radius:999px;
+      box-shadow: 0 4px 10px rgba(46,185,168,0.12);
+    }
+
+ 
+    .muted{ color:var(--muted); font-size:13px; }
+    .right { margin-left:auto; display:flex; gap:8px; align-items:center; }
+
+   
+    @media (max-width:880px){
+      .card{ padding:18px; }
+      .title{ font-size:18px; }
+      thead th, td{ padding:10px; font-size:13px; }
+      .logo{ width:48px; height:48px; }
+    }
+
+
+  </style>
+ 
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // --- YAHAN APNA CONFIG PASTE KARO ---
+const firebaseConfig = {
+
+  apiKey: "AIzaSyAhvds2Rk67mSiidT229Pb4krISTWLB3_8",
+
+  authDomain: "p-student-management-system.firebaseapp.com",
+
+  projectId: "p-student-management-system",
+
+  storageBucket: "p-student-management-system.firebasestorage.app",
+
+  messagingSenderId: "661994689671",
+
+  appId: "1:661994689671:web:2ab60a5afd78b591ab5422",
+
+  measurementId: "G-9DB8SL89J4"
+
+};
+
+    // ------------------------------------
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Auth Guard: Check karo ki user 'staff-professor' hai
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const userDocRef = doc(db, "users", user.uid);
+        const userDoc = await getDoc(userDocRef);
+        if (!userDoc.exists() || userDoc.data().role !== 'staff-professor') {
+          alert("Aap professor nahi hain. Access denied.");
+          logout();
+        }
+      } else {
+        window.location.href = 'login.html';
+      }
+    });
+
+    // Logout Function
+    async function logout() {
+      try {
+        await signOut(auth);
+        window.location.href = 'login.html';
+      } catch (error) { console.error('Logout Error:', error); }
+    }
+    document.getElementById('logout-button').addEventListener('click', logout);
+  </script> -->
+</body>
+</html>

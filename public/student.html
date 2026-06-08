@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Portal</title>
+  <link rel="stylesheet" href="student.css">
+  
+</head>
+<body>
+  <div class="dashboard">
+    <header>
+      <h1>Student Dashboard</h1>
+      <div class="profile">
+        <img src="https://i.pravatar.cc/50" alt="Profile">
+        <div>
+          <h3>Ayush</h3>
+          <p>Roll No: 402026-0471</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="info-grid">
+      <div class="card">
+        <h3>Admission Info</h3>
+        <p><strong>ID:</strong> AD2025-0471</p>
+        <p><strong>Course:</strong> B.Tech CSE (AI)</p>
+        <p><strong>Semester:</strong> 1st Year</p>
+        <p><strong>Status:</strong> Verified ✅</p>
+      </div>
+
+      <div class="card">
+        <h3>Admission Timeline</h3>
+        <p>Form Submitted: June 5, 2025</p>
+        <p>Payment Completed: June 7, 2025</p>
+        <p>Documents Uploaded: June 9, 2025</p>
+        <p>Verification Done: June 10, 2025</p>
+      </div>
+
+      <div class="card">
+        <h3>Progress</h3>
+        <p>Form ➜ ✅</p>
+        <p>Documents ➜ ✅</p>
+        <p>Payment ➜ ✅</p>
+        <p>Verification ➜ ✅</p>
+      </div>
+    </div>
+
+    <div class="documents">
+      <h3 style="color: var(--accent); margin-bottom: 10px;">Documents</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Document</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>10th Marksheet</td>
+            <td><span class="status verified">Verified</span></td>
+            <td><button class="downloads-btn">Update</button></td>
+          </tr>
+          <tr>
+            <td>12th Marksheet</td>
+            <td><span class="status reupload">Reupload</span></td>
+            <td><button class="downloads-btn">Reupload</button></td>
+          </tr>
+          <tr>
+            <td>Aadhar</td>
+            <td><span class="status pending">Pending</span></td>
+            <td><button class="downloads-btn">Upload</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="downloads">
+      <button>Download Admission Form</button>
+      <button>Download Fee Receipt</button>
+      <button>Verification Slip</button>
+      <button>All-in-One ZIP</button>
+    </div>
+  </div>
+</body>
+</html>

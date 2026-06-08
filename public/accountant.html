@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accountant Dashboard</title>
+  <link rel="stylesheet" href="acc.css">
+
+ 
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+
+  
+</head>
+<body>
+  <header>
+    <h1>💼 Accountant Dashboard</h1>
+    <div class="user-info">Welcome, <strong>Sarah Johnson</strong> | accountant@college.edu</div>
+  </header>
+
+  <main class="dashboard-container">
+    <div class="card">
+      <h2>🧾 Student Admission Details</h2>
+      <table id="admissionTable" class="display">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Status</th>
+            <th>Fee Paid</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>John Doe</td><td>B.Tech</td><td>Admitted</td><td>4,500</td></tr>
+          <tr><td>Emily Clark</td><td>B.Sc</td><td>Pending</td><td>0</td></tr>
+          <tr><td>David Kim</td><td>MBA</td><td>Admitted</td><td>7,000</td></tr>
+          <tr><td>Olivia Patel</td><td>BBA</td><td>Admitted</td><td>3,500</td></tr>
+          <tr><td>Michael Smith</td><td>BCA</td><td>Pending</td><td>1,200</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>💰 Fee Summary</h2>
+      <canvas id="feeChart"></canvas>
+    </div>
+
+    <div class="card">
+      <h2>📚 Library Records</h2>
+      <canvas id="libraryChart"></canvas>
+    </div>
+
+    <div class="card">
+      <h2>📈 Financial Overview</h2>
+      <canvas id="financeChart"></canvas>
+    </div>
+  </main>
+
+  <footer>© 2025 College Finance Portal | Managed by Accounts Department</footer>
+
+  <style>
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(145deg, #0e1621, #111a28);
+      color: #e4e8ef;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background: rgba(15, 25, 35, 0.95);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+    }
+
+    header h1 {
+      color: #00fff2;
+      font-size: 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .user-info {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .dashboard-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 25px;
+      padding: 40px;
+      flex-grow: 1;
+    }
+
+    .card {
+      background: rgba(20, 30, 45, 0.9);
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+    }
+
+    .card h2 {
+      color: #00fff2;
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #c6cbd2;
+      margin: 6px 0;
+    }
+
+    .progress-bar {
+      background: #1f2a38;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 10px;
+      margin-top: 10px;
+    }
+
+    .progress {
+      height: 100%;
+      background: linear-gradient(90deg, #00fff2, #0096ff);
+    }
+
+    table.dataTable {
+      width: 100%;
+      border-collapse: collapse;
+      color: #c6cbd2;
+      font-size: 0.9rem;
+    }
+
+    table.dataTable thead th {
+      color: #00fff2;
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    table.dataTable tbody tr:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 250px !important;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 0.85rem;
+      background: rgba(15, 25, 35, 0.9);
+      color: #8f9ea8;
+    }
+
+
+  </style>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+ <script>
+  
+    $(document).ready(function() {
+      $('#admissionTable').DataTable({
+        paging: false,
+        info: false,
+        searching: true,
+      });
+    });
+
+    const feeCtx = document.getElementById('feeChart').getContext('2d');
+    new Chart(feeCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Collected', 'Pending', 'Refunds'],
+        datasets: [{
+          data: [420000, 35000, 2500],
+          backgroundColor: ['#00fff2', '#0077ff', '#ff5c93'],
+          borderWidth: 0,
+        }]
+      },
+      options: {
+        plugins: {
+          legend: { labels: { color: '#c6cbd2' } }
+        }
+      }
+    });
+
+    const libCtx = document.getElementById('libraryChart').getContext('2d');
+    new Chart(libCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Borrowed', 'Returned', 'Overdue'],
+        datasets: [{
+          label: 'Books',
+          data: [560, 520, 40],
+          backgroundColor: ['#00fff2', '#0096ff', '#ff8f61']
+        }]
+      },
+      options: {
+        scales: {
+          x: { ticks: { color: '#c6cbd2' } },
+          y: { ticks: { color: '#c6cbd2' } }
+        },
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    const finCtx = document.getElementById('financeChart').getContext('2d');
+    new Chart(finCtx, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'Expenses ($)',
+          data: [50000, 75000, 120000, 160000, 200000, 250000],
+          borderColor: '#00fff2',
+          backgroundColor: 'rgba(0,255,242,0.2)',
+          fill: true,
+          tension: 0.3
+        }]
+      },
+      options: {
+        scales: {
+          x: { ticks: { color: '#c6cbd2' } },
+          y: { ticks: { color: '#c6cbd2' } }
+        },
+        plugins: { legend: { labels: { color: '#c6cbd2' } } }
+      }
+    });
+
+ </script>
+</html>
